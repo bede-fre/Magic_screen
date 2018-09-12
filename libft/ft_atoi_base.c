@@ -6,21 +6,25 @@
 /*   By: bede-fre <bede-fre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 15:11:42 by bede-fre          #+#    #+#             */
-/*   Updated: 2018/01/29 18:20:08 by bede-fre         ###   ########.fr       */
+/*   Updated: 2018/09/12 15:22:42 by bede-fre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
+#include <stdio.h>
 
-static void	ft_str_upcase(char *s)
+static char	*ft_str_lowercase(const char *s)
 {
-	int				i;
+	int	i;
+	char *tp;
 
+	if (!(tp = ft_strnew(ft_strlen(s))))
+		return (NULL);
 	i = -1;
 	while (s[++i])
-		if (s[i] >= 'a' && s[i] <= 'z')
-			s[i] = ft_toupper(s[i]);
+		tp[i] = ft_tolower(s[i]);
+	return (tp);
 }
 
 static int	ft_check(char *s, int i, int base, int *neg)
@@ -36,14 +40,14 @@ static int	ft_check(char *s, int i, int base, int *neg)
 	}
 	else if (s[i] == '0')
 	{
-		if (s[i + 1] == 'X' && base != 16)
+		if ((s[i + 1] == 'x' && base != 16) || s[i + 1] != 'x')
 			return (0);
 		i += 2;
 	}
 	while (s[i])
 	{
 		if ((s[i] >= '0' && s[i] < ('0' + base))
-			|| (s[i] >= 'A' && s[i] < ('A' + base - 10)))
+			|| (s[i] >= 'a' && s[i] < ('a' + base - 10)))
 			i++;
 		else
 			return (0);
@@ -51,28 +55,29 @@ static int	ft_check(char *s, int i, int base, int *neg)
 	return (1);
 }
 
-int			ft_atoi_base(char *s, int base)
+int			ft_atoi_base(const char *s, int base)
 {
 	int				p;
 	int				neg;
 	int				i;
 	unsigned int	ret;
+	char			*str;
 
 	i = 0;
 	neg = 0;
 	ret = 0;
 	p = 0;
-	ft_str_upcase(s);
-	if ((base < 2 || base > 16) || ft_check(s, i, base, &neg) == 0)
+	str = ft_str_lowercase(s);
+	if ((base < 2 || base > 16) || ft_check(str, i, base, &neg) == 0)
 		return (0);
-	ft_strrev(s);
+	ft_strrev(str);
 	i = 0;
-	while (s[i] && (s[i] != '-' && s[i] != '+' && s[i] != 'X'))
+	while (str[i] && (str[i] != '-' && str[i] != '+' && str[i] != 'x'))
 	{
-		if (s[i] >= '0' && s[i] < ('0' + base))
-			ret += (s[i++] - '0') * ft_power(base, p++);
-		else if (s[i] >= 'A' && (s[i] < ('A' + (base - 10))))
-			ret += (s[i++] + 10 - 'A') * ft_power(base, p++);
+		if (str[i] >= '0' && str[i] < ('0' + base))
+			ret += (str[i++] - '0') * ft_power(base, p++);
+		else if (str[i] >= 'A' && (str[i] < ('a' + (base - 10))))
+			ret += (str[i++] + 10 - 'a') * ft_power(base, p++);
 	}
 	if (neg == 1)
 		return (-ret);

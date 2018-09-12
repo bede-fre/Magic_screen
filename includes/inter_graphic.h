@@ -6,7 +6,7 @@
 /*   By: bede-fre <bede-fre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 14:53:11 by bede-fre          #+#    #+#             */
-/*   Updated: 2018/09/11 19:07:41 by bede-fre         ###   ########.fr       */
+/*   Updated: 2018/09/12 13:42:29 by bede-fre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ typedef struct		s_all
 	t_rect			rect2;
 	t_rect			rect3;
 	int				clic;
+	char			text_keys[52];
+	char			text[9];
 }					t_all;
 
 #endif

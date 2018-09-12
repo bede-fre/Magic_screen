@@ -6,7 +6,7 @@
 /*   By: bede-fre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 11:44:42 by bede-fre          #+#    #+#             */
-/*   Updated: 2018/03/06 13:35:50 by bede-fre         ###   ########.fr       */
+/*   Updated: 2018/09/12 14:14:00 by bede-fre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ char				*ft_itoa_base(int n, int base);
 int					ft_gnl(const int fd, char **line);
 int					ft_isspace(int c);
 char				**ft_split_whitespaces(char const *str);
-int					ft_atoi_base(char *s, int base);
+int					ft_atoi_base(const char *s, int base);
 int					ft_power(int nb, int power);
 long				ft_atol(const char *s);
 void				ft_error(char *s);
