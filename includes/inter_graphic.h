@@ -17,6 +17,7 @@
 # include "mlx.h"
 # include <math.h>
 # include <stdlib.h>
+# include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
 
@@ -74,7 +75,9 @@ typedef struct		s_all
 	t_rect			rect;
 	t_rect			rect2;
 	t_rect			rect3;
+	t_rect			rect4;
 	int				clic;
+	int				counter;
 	char			text_keys[52];
 	char			text[9];
 }					t_all;

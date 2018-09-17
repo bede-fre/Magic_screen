@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "inter_graphic.h"
-#include <stdio.h>
 
 static void ft_init_text_keys(char (*text_keys)[52])
 {
@@ -46,8 +45,21 @@ static void	ft_fill_px(t_mlx *ptr, int x, int y, int color)
 	ptr->s_px[px + 2] = (unsigned char)(color >> 16);
 	ptr->s_px[px + 3] = (unsigned char)(color >> 24);
 }
+static void	ft_rectangle(t_mlx *ptr, t_rect *rect)
+{
+	t_rect coord_inc;
+	
+	coord_inc.y = -1;
+	while (++coord_inc.y <= rect->lenght)
+	{
+		coord_inc.x = -1;
+		while (++coord_inc.x <= rect->width)
+			ft_fill_px(ptr, coord_inc.x + rect->x, coord_inc.y + rect->y,
+                rect->color);
+	}
+}
 
-static void	ft_rectangle(t_mlx *ptr, t_rect *rect, int col_bord)
+static void	ft_rectangle_with_border(t_mlx *ptr, t_rect *rect, int col_bord)
 {
 	t_rect coord_inc;
 	
@@ -61,6 +73,13 @@ static void	ft_rectangle(t_mlx *ptr, t_rect *rect, int col_bord)
 				 || coord_inc.x > rect->width - 2
 				 ||coord_inc.y > rect->lenght - 2) ? col_bord : rect->color);
 	}
+}
+
+static void ft_loading_bar(t_all *all)
+{
+	all->rect4.width += 5;
+	ft_rectangle(&all->ptr, &all->rect4);
+	mlx_put_image_to_window(all->ptr.mlx, all->ptr.win, all->ptr.img, 0, 0);
 }
 
 static int	ft_enable_diseable_textbar(int button, int x, int y, t_all *all)
@@ -97,7 +116,7 @@ static int	ft_textbar_keys(int key, t_all *all)
 		all->text[i] = all->text_keys[key];
 	}
 	all->rect3.color = ft_atoi_base(all->text, 16);
-	ft_rectangle(&all->ptr, &all->rect3, 0x000000);
+	ft_rectangle_with_border(&all->ptr, &all->rect3, 0x000000);
 	mlx_put_image_to_window(all->ptr.mlx, all->ptr.win, all->ptr.img, 0, 0);
 	mlx_string_put(all->ptr.mlx, all->ptr.win, all->rect2.x + 10,
 		all->rect2.y + 3, 0x000000, all->text);
@@ -107,12 +126,18 @@ static int	ft_textbar_keys(int key, t_all *all)
 	else
 		mlx_string_put(all->ptr.mlx, all->ptr.win, all->rect2.x + (10 * i) + 20,
 		all->rect2.y + 3, 0x000000, "_");
-	return (0);
+    if (all->rect4.width < 100)
+        ft_loading_bar(all);
+    return (0);
 }
 
 static void	ft_init_image(t_all *all)
 {
-	all->clic = 0;
+    int i;
+
+    i = 0;
+    all->clic = 0;
+//	all->counter = 0;
 	all->ptr.mlx = mlx_init();
 	all->ptr.win = mlx_new_window(all->ptr.mlx, WIN_WIDTH,
 		WIN_LENGHT, "FdF");
@@ -125,20 +150,26 @@ static void	ft_init_image(t_all *all)
 	all->rect.width = 400;
 	all->rect.lenght = IMG_LENGHT;
 	all->rect.color = 0xFFFFFF;
-	ft_rectangle(&all->ptr, &all->rect, 0xFFFFFF);
+	ft_rectangle_with_border(&all->ptr, &all->rect, 0xFFFFFF);
 	all->rect2.x = 250;
 	all->rect2.y = 25;
 	all->rect2.width = 100;
 	all->rect2.lenght = 25;
 	all->rect2.color = 0xFFFFFF;
-	ft_rectangle(&all->ptr, &all->rect2, 0);
+	ft_rectangle_with_border(&all->ptr, &all->rect2, 0);
 	all->rect3.x = 250;
 	all->rect3.y = 60;
 	all->rect3.width = 100;
 	all->rect3.lenght = 25;
 	all->rect3.color = 0xFFFFFF;
-	ft_rectangle(&all->ptr, &all->rect3, 0x000000);
-	mlx_hook(all->ptr.win, 4, (1L << 2), ft_enable_diseable_textbar, all);
+	ft_rectangle_with_border(&all->ptr, &all->rect3, 0x000000);
+	all->rect4.x = 250;
+	all->rect4.y = 95;
+	all->rect4.width = 5;
+	all->rect4.lenght = 25;
+	all->rect4.color = 0x00AA00;
+	ft_rectangle(&all->ptr, &all->rect4);
+    mlx_hook(all->ptr.win, 4, (1L << 2), ft_enable_diseable_textbar, all);
 	mlx_hook(all->ptr.win, 2, (1L << 0), ft_textbar_keys, all);
 	mlx_put_image_to_window(all->ptr.mlx, all->ptr.win, all->ptr.img, 0, 0);
 	mlx_string_put(all->ptr.mlx, all->ptr.win, all->rect2.x + 10,
