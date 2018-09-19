@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inter_graphic.h                                    :+:      :+:    :+:   */
+/*   magic_screen.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bede-fre <bede-fre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 14:53:11 by bede-fre          #+#    #+#             */
-/*   Updated: 2018/09/12 13:42:29 by bede-fre         ###   ########.fr       */
+/*   Updated: 2018/09/19 16:17:15 by bede-fre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INTER_GRAPHIC_H
-# define INTER_GRAPHIC_H
+#ifndef MAGIC_SCREEN_H
+# define MAGIC_SCREEN_H
 
 # include "libft.h"
 # include "mlx.h"
@@ -23,9 +23,15 @@
 
 # define WIN_WIDTH 1280
 # define WIN_LENGHT 720
-# define IMG_WIDTH 1280
-# define IMG_LENGHT 720
+# define IMG_MENU_WIDTH WIN_WIDTH
+# define IMG_MENU_LENGHT 35
+# define IMG_SCREEN_WIDTH WIN_WIDTH
+# define IMG_SCREEN_LENGHT (WIN_LENGHT - IMG_MENU_LENGHT)
 
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
+# define KEY_DOWN 125
+# define KEY_UP 126
 # define KEY_0 29
 # define KEY_1 18
 # define KEY_2 19
@@ -56,30 +62,37 @@ typedef struct		s_rect
 	int				color;
 }					t_rect;
 
+typedef struct		s_img
+{
+	void			*img;
+	char			*data;
+	int				bpp;
+	int				sl;
+	int				endian;
+	int				width;
+	int				lenght;
+}					t_img;
+
 typedef struct		s_mlx
 {
 	void			*mlx;
 	void			*win;
-	void			*img;
-	void			*img2;
-	char			*s_px;
-	char			*s_px2;
-	int				endian;
-	int				bpp;
-	int				sz_ln_px;
+	t_img			screen;
+	t_img			menu;
 }					t_mlx;
 
 typedef struct		s_all
 {
 	t_mlx			ptr;
-	t_rect			rect;
-	t_rect			rect2;
-	t_rect			rect3;
-	t_rect			rect4;
+	t_rect			menu;
+	t_rect			text_bar;
+	t_rect			visual_color;
 	int				clic;
-	int				counter;
 	char			text_keys[52];
 	char			text[9];
 }					t_all;
+
+void				ft_rectangle(t_img *img, t_rect *rect);
+void				ft_rectangle_with_border(t_img *img, t_rect *rect, int col_bord);
 
 #endif
