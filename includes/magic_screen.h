@@ -6,7 +6,7 @@
 /*   By: bede-fre <bede-fre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 14:53:11 by bede-fre          #+#    #+#             */
-/*   Updated: 2018/09/19 16:17:15 by bede-fre         ###   ########.fr       */
+/*   Updated: 2018/09/19 17:02:03 by bede-fre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,13 @@ typedef struct		s_rect
 	int				color;
 }					t_rect;
 
+typedef struct		s_cursor
+{
+	int				x;
+	int				y;
+	int				color;
+}					t_cursor;
+
 typedef struct		s_img
 {
 	void			*img;
@@ -87,11 +94,13 @@ typedef struct		s_all
 	t_rect			menu;
 	t_rect			text_bar;
 	t_rect			visual_color;
+	t_cursor		cursor;
 	int				clic;
 	char			text_keys[52];
 	char			text[9];
 }					t_all;
 
+void				ft_fill_px(t_img *img, int x, int y, int color);
 void				ft_rectangle(t_img *img, t_rect *rect);
 void				ft_rectangle_with_border(t_img *img, t_rect *rect, int col_bord);
 

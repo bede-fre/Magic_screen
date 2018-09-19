@@ -6,13 +6,13 @@
 /*   By: bede-fre <bede-fre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 15:14:54 by bede-fre          #+#    #+#             */
-/*   Updated: 2018/09/19 16:10:46 by bede-fre         ###   ########.fr       */
+/*   Updated: 2018/09/19 17:01:32 by bede-fre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "magic_screen.h"
 
-static void	ft_fill_px(t_img *img, int x, int y, int color)
+void	ft_fill_px(t_img *img, int x, int y, int color)
 {
 	int		px;
 
@@ -26,7 +26,7 @@ static void	ft_fill_px(t_img *img, int x, int y, int color)
 	img->data[px + 3] = (unsigned char)(color >> 24);
 }
 
-void		ft_rectangle(t_img *img, t_rect *rect)
+void	ft_rectangle(t_img *img, t_rect *rect)
 {
 	t_rect coord_inc;
 	
@@ -40,7 +40,7 @@ void		ft_rectangle(t_img *img, t_rect *rect)
 	}
 }
 
-void		ft_rectangle_with_border(t_img *img, t_rect *rect, int col_bord)
+void	ft_rectangle_with_border(t_img *img, t_rect *rect, int col_bord)
 {
 	t_rect coord_inc;
 	

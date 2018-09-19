@@ -6,7 +6,7 @@
 /*   By: bede-fre <bede-fre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 15:14:54 by bede-fre          #+#    #+#             */
-/*   Updated: 2018/09/19 16:24:06 by bede-fre         ###   ########.fr       */
+/*   Updated: 2018/09/19 17:22:44 by bede-fre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,33 @@ static int	ft_textbar_keys(int key, t_all *all)
 	int	i;
 	
 	i = 1;
+	if (key == KEY_LEFT)
+	{
+		ft_fill_px(&all->ptr.screen, all->cursor.x, all->cursor.y, all->cursor.color);
+		all->cursor.x -= 1;
+	}
+	if (key == KEY_RIGHT)
+	{
+		ft_fill_px(&all->ptr.screen, all->cursor.x, all->cursor.y, all->cursor.color);
+		all->cursor.x += 1;
+	}
+	if (key == KEY_UP)
+	{
+		ft_fill_px(&all->ptr.screen, all->cursor.x, all->cursor.y, all->cursor.color);
+		all->cursor.y -= 1;
+	}
+	if (key == KEY_DOWN)
+	{
+		ft_fill_px(&all->ptr.screen, all->cursor.x, all->cursor.y, all->cursor.color);
+		all->cursor.y += 1;
+	}
+	if (key == KEY_SPACE)
+	{
+		mlx_destroy_image(all->ptr.mlx, all->ptr.screen.img);
+		all->ptr.screen.img = mlx_new_image(all->ptr.mlx, IMG_SCREEN_WIDTH,
+			IMG_SCREEN_LENGHT);
+		mlx_put_image_to_window(all->ptr.mlx, all->ptr.win, all->ptr.screen.img, 0, IMG_MENU_LENGHT);
+	}
 	if (key == KEY_ECHAP && all->clic == 0)
 		exit(0);
 	if (key == KEY_ECHAP && all->clic == 1)
@@ -66,6 +93,7 @@ static int	ft_textbar_keys(int key, t_all *all)
 		all->text[i] = all->text_keys[key];
 	}
 	all->visual_color.color = ft_atoi_base(all->text, 16);
+	all->cursor.color = all->visual_color.color;
 	ft_rectangle_with_border(&all->ptr.menu, &all->visual_color, 0x000000);
 	mlx_put_image_to_window(all->ptr.mlx, all->ptr.win, all->ptr.screen.img, 0, IMG_MENU_LENGHT);
 	mlx_put_image_to_window(all->ptr.mlx, all->ptr.win, all->ptr.menu.img, 0, 0);
@@ -106,6 +134,10 @@ static void	ft_init_image(t_all *all)
 	all->ptr.menu.lenght = IMG_MENU_LENGHT;
 	all->ptr.screen.width = IMG_SCREEN_WIDTH;
 	all->ptr.screen.lenght = IMG_SCREEN_LENGHT;
+
+	all->cursor.x = IMG_SCREEN_WIDTH / 2;
+	all->cursor.y = IMG_SCREEN_LENGHT / 2;
+	all->cursor.color = 0xFFFFFF;
 
 	all->menu.x = 0;
 	all->menu.y = 0;
