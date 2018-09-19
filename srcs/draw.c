@@ -26,6 +26,41 @@ void	ft_fill_px(t_img *img, int x, int y, int color)
 	img->data[px + 3] = (unsigned char)(color >> 24);
 }
 
+void    ft_fill_line(t_img *img, t_cursor *cursor, int key)
+{
+    int i;
+
+    i = -1;
+    printf("%d\n", cursor->thickness);
+    while (++i < cursor->thickness)
+    {
+        if (key == KEY_LEFT)
+        {
+            ft_fill_px(img, cursor->x, cursor->y - i, cursor->color);
+            ft_fill_px(img, cursor->x, cursor->y + i, cursor->color);
+            ft_fill_px(img, cursor->x, cursor->y, cursor->color);
+        }
+        if (key == KEY_RIGHT)
+        {
+            ft_fill_px(img, cursor->x, cursor->y - i, cursor->color);
+            ft_fill_px(img, cursor->x, cursor->y + i, cursor->color);
+            ft_fill_px(img, cursor->x, cursor->y, cursor->color);
+        }
+        if (key == KEY_UP)
+        {
+            ft_fill_px(img, cursor->x - i, cursor->y, cursor->color);
+            ft_fill_px(img, cursor->x + i, cursor->y, cursor->color);
+            ft_fill_px(img, cursor->x, cursor->y, cursor->color);
+        }
+        if (key == KEY_DOWN)
+        {
+            ft_fill_px(img, cursor->x - i, cursor->y, cursor->color);
+            ft_fill_px(img, cursor->x + i, cursor->y, cursor->color);
+            ft_fill_px(img, cursor->x, cursor->y, cursor->color);
+        }
+    }
+}
+
 void	ft_rectangle(t_img *img, t_rect *rect)
 {
 	t_rect coord_inc;

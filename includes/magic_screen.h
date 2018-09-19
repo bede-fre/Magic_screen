@@ -32,6 +32,8 @@
 # define KEY_RIGHT 124
 # define KEY_DOWN 125
 # define KEY_UP 126
+# define KEY_PLUS 44
+# define KEY_MINUS 24
 # define KEY_0 29
 # define KEY_1 18
 # define KEY_2 19
@@ -67,6 +69,7 @@ typedef struct		s_cursor
 	int				x;
 	int				y;
 	int				color;
+	int				thickness;
 }					t_cursor;
 
 typedef struct		s_img
@@ -101,6 +104,7 @@ typedef struct		s_all
 }					t_all;
 
 void				ft_fill_px(t_img *img, int x, int y, int color);
+void				ft_fill_line(t_img *img, t_cursor *cursor, int key);
 void				ft_rectangle(t_img *img, t_rect *rect);
 void				ft_rectangle_with_border(t_img *img, t_rect *rect, int col_bord);
 

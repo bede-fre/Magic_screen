@@ -50,24 +50,33 @@ static int	ft_textbar_keys(int key, t_all *all)
 	int	i;
 	
 	i = 1;
-	if (key == KEY_LEFT)
+	if (key == KEY_PLUS)
+        all->cursor.thickness += 1;
+	if (key == KEY_MINUS)
+    {
+        if (all->cursor.thickness > 1)
+            all->cursor.thickness -= 1;
+        else
+            all->cursor.thickness = 1;
+    }
+    if (key == KEY_LEFT)
 	{
-		ft_fill_px(&all->ptr.screen, all->cursor.x, all->cursor.y, all->cursor.color);
+		ft_fill_line(&all->ptr.screen, &all->cursor, key);
 		all->cursor.x -= 1;
 	}
 	if (key == KEY_RIGHT)
 	{
-		ft_fill_px(&all->ptr.screen, all->cursor.x, all->cursor.y, all->cursor.color);
+		ft_fill_line(&all->ptr.screen, &all->cursor, key);
 		all->cursor.x += 1;
 	}
 	if (key == KEY_UP)
 	{
-		ft_fill_px(&all->ptr.screen, all->cursor.x, all->cursor.y, all->cursor.color);
+		ft_fill_line(&all->ptr.screen, &all->cursor, key);
 		all->cursor.y -= 1;
 	}
 	if (key == KEY_DOWN)
 	{
-		ft_fill_px(&all->ptr.screen, all->cursor.x, all->cursor.y, all->cursor.color);
+		ft_fill_line(&all->ptr.screen, &all->cursor, key);
 		all->cursor.y += 1;
 	}
 	if (key == KEY_SPACE)
@@ -138,6 +147,7 @@ static void	ft_init_image(t_all *all)
 	all->cursor.x = IMG_SCREEN_WIDTH / 2;
 	all->cursor.y = IMG_SCREEN_LENGHT / 2;
 	all->cursor.color = 0xFFFFFF;
+	all->cursor.thickness = 1;
 
 	all->menu.x = 0;
 	all->menu.y = 0;
