@@ -6,7 +6,7 @@
 /*   By: bede-fre <bede-fre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 15:14:54 by bede-fre          #+#    #+#             */
-/*   Updated: 2018/09/19 17:22:44 by bede-fre         ###   ########.fr       */
+/*   Updated: 2018/09/20 10:22:38 by bede-fre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,15 @@ static int	ft_textbar_keys(int key, t_all *all)
 	int	i;
 	
 	i = 1;
-	if (key == KEY_PLUS)
+	printf("%d\n", key);
+	if (key == KEY_P)
         all->cursor.thickness += 1;
-	if (key == KEY_MINUS)
+	if (key == KEY_M)
     {
-        if (all->cursor.thickness > 1)
+        if (all->cursor.thickness > 0)
             all->cursor.thickness -= 1;
         else
-            all->cursor.thickness = 1;
+            all->cursor.thickness = 0;
     }
     if (key == KEY_LEFT)
 	{

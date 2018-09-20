@@ -6,7 +6,7 @@
 /*   By: bede-fre <bede-fre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 14:53:11 by bede-fre          #+#    #+#             */
-/*   Updated: 2018/09/19 17:02:03 by bede-fre         ###   ########.fr       */
+/*   Updated: 2018/09/20 09:07:04 by bede-fre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 # define KEY_RIGHT 124
 # define KEY_DOWN 125
 # define KEY_UP 126
-# define KEY_PLUS 44
-# define KEY_MINUS 24
+# define KEY_P 35
+# define KEY_M 46
 # define KEY_0 29
 # define KEY_1 18
 # define KEY_2 19
@@ -54,6 +54,12 @@
 # define KEY_SPACE 49
 # define KEY_ECHAP 53
 # define LEFT_CLIC 1
+
+typedef struct		s_point
+{
+	int				x;
+	int				y;
+}					t_point;
 
 typedef struct		s_rect
 {
