@@ -6,7 +6,7 @@
 /*   By: bede-fre <bede-fre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 15:14:54 by bede-fre          #+#    #+#             */
-/*   Updated: 2018/09/20 10:20:35 by bede-fre         ###   ########.fr       */
+/*   Updated: 2019/01/23 15:54:49 by bede-fre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ static void	ft_cercle(t_img *img, t_cursor *cursor)
 
 void		ft_fill_line(t_img *img, t_cursor *cursor, int key)
 {
-	printf("%d\n", cursor->thickness);
 	if (key == KEY_LEFT)
 		ft_cercle(img, cursor);
 	if (key == KEY_RIGHT)
@@ -96,7 +95,7 @@ void		ft_rectangle(t_img *img, t_rect *rect)
 	}
 }
 
-void			ft_rectangle_with_border(t_img *img, t_rect *rect, int col_bord)
+void		ft_rectangle_with_border(t_img *img, t_rect *rect, int col_bord)
 {
 	t_rect coord_inc;
 
@@ -107,7 +106,8 @@ void			ft_rectangle_with_border(t_img *img, t_rect *rect, int col_bord)
 		while (++coord_inc.x <= rect->width)
 			ft_fill_px(img, coord_inc.x + rect->x, coord_inc.y + rect->y,
 					(coord_inc.x < 2 || coord_inc.y < 2
-					 || coord_inc.x > rect->width - 2
-					 ||coord_inc.y > rect->lenght - 2) ? col_bord : rect->color);
+					|| coord_inc.x > rect->width - 2
+					|| coord_inc.y > rect->lenght - 2)
+					? col_bord : rect->color);
 	}
 }

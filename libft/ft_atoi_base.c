@@ -6,7 +6,7 @@
 /*   By: bede-fre <bede-fre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 15:11:42 by bede-fre          #+#    #+#             */
-/*   Updated: 2018/09/12 15:22:42 by bede-fre         ###   ########.fr       */
+/*   Updated: 2019/01/23 17:38:27 by bede-fre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 static char	*ft_str_lowercase(const char *s)
 {
-	int	i;
-	char *tp;
+	int		i;
+	char	*tp;
 
 	if (!(tp = ft_strnew(ft_strlen(s))))
 		return (NULL);

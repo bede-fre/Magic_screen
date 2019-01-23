@@ -6,7 +6,7 @@
 #    By: bede-fre <bede-fre@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/19 14:44:07 by bede-fre          #+#    #+#              #
-#    Updated: 2018/09/19 15:13:35 by bede-fre         ###   ########.fr        #
+#    Updated: 2019/01/23 17:45:35 by bede-fre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@
 
 OPE_SYS			= $(shell uname)
 NAME			= magic_screen
-SRCS1			= main.c draw.c
+SRCS1			= main.c cursor_and_textbar.c init.c draw.c
 SRCS			= $(addprefix $(SRCS_DIR), $(SRCS1))
 OBJS			= $(addprefix $(OBJS_DIR), $(SRCS1:.c=.o))
 SRCS_DIR		= srcs/
@@ -120,5 +120,5 @@ title:
 	@echo
 	@echo "◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆"
 	@printf $(_YELLOW)
-	@echo "                                                    2018 © lguiller bede-fre"
+	@echo "                                                    2018 © bede-fre"
 	@echo $(_END)
