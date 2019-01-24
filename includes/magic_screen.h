@@ -6,7 +6,7 @@
 /*   By: bede-fre <bede-fre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 14:53:11 by bede-fre          #+#    #+#             */
-/*   Updated: 2019/01/23 16:42:39 by bede-fre         ###   ########.fr       */
+/*   Updated: 2019/01/24 13:28:10 by bede-fre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,15 @@
 # define KEY_ENTER 36
 # define KEY_ECHAP 53
 # define LEFT_CLIC 1
+
+enum				e_keys
+{
+	LEFT = 0,
+	RIGHT,
+	DOWN,
+	UP,
+	END
+};
 
 typedef struct		s_point
 {
@@ -106,15 +115,19 @@ typedef struct		s_all
 	t_rect			visual_color;
 	t_cursor		cursor;
 	int				clic;
-	char			text_keys[52];
+	int				keys[END];
+	int				keys_bindings[END];
 	char			text[9];
+	char			text_keys[52];
 }					t_all;
 
+int					ft_key_press(int key, t_all *all);
+int					ft_key_release(int key, t_all *all);
 int					ft_textbar_keys(int key, t_all *all);
 void				ft_init_image(t_all *all);
 void				ft_rectangle(t_img *img, t_rect *rect);
+void				ft_circle(t_img *img, t_cursor *cursor);
 void				ft_fill_px(t_img *img, int x, int y, int color);
-void				ft_fill_line(t_img *img, t_cursor *cursor, int key);
 void				ft_rectangle_with_border(t_img *img, t_rect *rect,
 					int col_bord);
 

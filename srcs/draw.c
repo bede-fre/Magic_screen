@@ -6,7 +6,7 @@
 /*   By: bede-fre <bede-fre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 15:14:54 by bede-fre          #+#    #+#             */
-/*   Updated: 2019/01/23 15:54:49 by bede-fre         ###   ########.fr       */
+/*   Updated: 2019/01/24 13:30:48 by bede-fre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,19 @@ void		ft_fill_px(t_img *img, int x, int y, int color)
 	img->data[px + 3] = (unsigned char)(color >> 24);
 }
 
-static void	ft_cercle(t_img *img, t_cursor *cursor)
+static void	ft_algo_circle(t_img *img, t_cursor *cursor, int i, int j)
+{
+	ft_fill_px(img, (cursor->x + i), (cursor->y + j), cursor->color);
+	ft_fill_px(img, (cursor->x + j), (cursor->y + i), cursor->color);
+	ft_fill_px(img, (cursor->x - i), (cursor->y + j), cursor->color);
+	ft_fill_px(img, (cursor->x - j), (cursor->y + i), cursor->color);
+	ft_fill_px(img, (cursor->x + i), (cursor->y - j), cursor->color);
+	ft_fill_px(img, (cursor->x + j), (cursor->y - i), cursor->color);
+	ft_fill_px(img, (cursor->x - i), (cursor->y - j), cursor->color);
+	ft_fill_px(img, (cursor->x - j), (cursor->y - i), cursor->color);
+}
+
+void		ft_circle(t_img *img, t_cursor *cursor)
 {
 	int	h;
 	int	i;
@@ -41,44 +53,15 @@ static void	ft_cercle(t_img *img, t_cursor *cursor)
 		k = j - 1;
 		while (j >= i)
 		{
-			ft_fill_px(img, (cursor->x + i), (cursor->y + j), cursor->color);
-			ft_fill_px(img, (cursor->x + j), (cursor->y + i), cursor->color);
-			ft_fill_px(img, (cursor->x - i), (cursor->y + j), cursor->color);
-			ft_fill_px(img, (cursor->x - j), (cursor->y + i), cursor->color);
-			ft_fill_px(img, (cursor->x + i), (cursor->y - j), cursor->color);
-			ft_fill_px(img, (cursor->x + j), (cursor->y - i), cursor->color);
-			ft_fill_px(img, (cursor->x - i), (cursor->y - j), cursor->color);
-			ft_fill_px(img, (cursor->x - j), (cursor->y - i), cursor->color);
+			ft_algo_circle(img, cursor, i, j);
 			if (k >= 2 * i)
-			{
-				k = k - 2 * i - 1;
-				++i;
-			}
+				k = k - 2 * (i++) - 1;
 			else if (k < 2 * (h - j))
-			{
-				k = k + 2 * j - 1;
-				--j;
-			}
+				k = k + 2 * (j--) - 1;
 			else
-			{
-				k = k + 2 * (j - i - 1);
-				--j;
-				++i;
-			}
+				k = k + 2 * ((j--) - (i++) - 1);
 		}
 	}
-}
-
-void		ft_fill_line(t_img *img, t_cursor *cursor, int key)
-{
-	if (key == KEY_LEFT)
-		ft_cercle(img, cursor);
-	if (key == KEY_RIGHT)
-		ft_cercle(img, cursor);
-	if (key == KEY_UP)
-		ft_cercle(img, cursor);
-	if (key == KEY_DOWN)
-		ft_cercle(img, cursor);
 }
 
 void		ft_rectangle(t_img *img, t_rect *rect)

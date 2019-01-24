@@ -6,11 +6,34 @@
 /*   By: bede-fre <bede-fre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 15:14:54 by bede-fre          #+#    #+#             */
-/*   Updated: 2019/01/23 16:37:22 by bede-fre         ###   ########.fr       */
+/*   Updated: 2019/01/24 13:30:55 by bede-fre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "magic_screen.h"
+
+int			ft_key_press(int key, t_all *all)
+{
+	int	i;
+
+	i = -1;
+	while (++i < END)
+		if (all->keys_bindings[i] == key)
+			all->keys[i] = 1;
+	ft_textbar_keys(key, all);
+	return (0);
+}
+
+int			ft_key_release(int key, t_all *all)
+{
+	int	i;
+
+	i = -1;
+	while (++i < END)
+		if (all->keys_bindings[i] == key)
+			all->keys[i] = 0;
+	return (0);
+}
 
 static void	ft_init_text_keys(char (*text_keys)[52])
 {
@@ -32,6 +55,19 @@ static void	ft_init_text_keys(char (*text_keys)[52])
 	text_keys[0][KEY_F] = 'F';
 }
 
+static void	ft_init_keys(int (*keys)[END], int (*keys_bindings)[END])
+{
+	int	i;
+
+	i = -1;
+	while (++i < END)
+		keys[0][i] = 0;
+	keys_bindings[0][LEFT] = KEY_LEFT;
+	keys_bindings[0][RIGHT] = KEY_RIGHT;
+	keys_bindings[0][DOWN] = KEY_DOWN;
+	keys_bindings[0][UP] = KEY_UP;
+}
+
 int			main(void)
 {
 	t_all	all;
@@ -47,6 +83,7 @@ int			main(void)
 	all.text[i] = '\0';
 	all.text[0] = '0';
 	all.text[1] = 'x';
+	ft_init_keys(&all.keys, &all.keys_bindings);
 	ft_init_text_keys(&all.text_keys);
 	ft_init_image(&all);
 	return (0);

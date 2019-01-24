@@ -6,7 +6,7 @@
 /*   By: bede-fre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 15:03:03 by bede-fre          #+#    #+#             */
-/*   Updated: 2019/01/23 15:55:08 by bede-fre         ###   ########.fr       */
+/*   Updated: 2019/01/24 13:54:31 by bede-fre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,6 @@ static void	ft_init_cursor_and_textbar(t_all *all)
 
 void		ft_init_image(t_all *all)
 {
-	int i;
-
-	i = 0;
 	all->clic = 0;
 	all->ptr.mlx = mlx_init();
 	all->ptr.win = mlx_new_window(all->ptr.mlx, WIN_WIDTH,
@@ -87,12 +84,13 @@ void		ft_init_image(t_all *all)
 	all->visual_color.color = 0xFFFFFF;
 	ft_rectangle_with_border(&all->ptr.menu, &all->visual_color, 0x000000);
 	mlx_hook(all->ptr.win, 4, (1L << 2), ft_enable_diseable_textbar, all);
-	mlx_hook(all->ptr.win, 2, (1L << 0), ft_textbar_keys, all);
+	mlx_hook(all->ptr.win, 2, (1L << 0), ft_key_press, all);
+	mlx_hook(all->ptr.win, 3, (1L << 1), ft_key_release, all);
 	mlx_put_image_to_window(all->ptr.mlx, all->ptr.win, all->ptr.screen.img, 0,
 	IMG_MENU_LENGHT);
 	mlx_put_image_to_window(all->ptr.mlx, all->ptr.win, all->ptr.menu.img, 0,
 	0);
 	mlx_string_put(all->ptr.mlx, all->ptr.win, all->text_bar.x + 10,
-	all->text_bar.y + 3, 0x000000, "0x_");
+	all->text_bar.y + 3, 0x000000, "0xFFFFFF");
 	mlx_loop(all->ptr.mlx);
 }
