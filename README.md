@@ -5,7 +5,7 @@ A simple 2D magic screen renderer.
 
 ## Features :
 
-* Choice color (Inside the textbar, in hexadecimal format)
+* Choice color (Inside the textbar, in hexadecimal RGB format)
 * Choice size cursor
 
 ## Download format :
