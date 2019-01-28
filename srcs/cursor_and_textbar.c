@@ -6,7 +6,7 @@
 /*   By: bede-fre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 14:31:31 by bede-fre          #+#    #+#             */
-/*   Updated: 2019/01/24 14:08:35 by bede-fre         ###   ########.fr       */
+/*   Updated: 2019/01/28 13:07:06 by bede-fre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ static void	ft_cursor_thickness_and_clear(int key, t_all *all)
 static void	ft_cursor_directions(t_all *all)
 {
 	ft_circle(&all->ptr.screen, &all->cursor);
-	if (all->keys[LEFT])
+	if (all->keys[LEFT] && (all->cursor.x >= 0))
 		all->cursor.x -= 1;
-	if (all->keys[RIGHT])
+	if (all->keys[RIGHT] && (all->cursor.x < IMG_SCREEN_WIDTH))
 		all->cursor.x += 1;
-	if (all->keys[UP])
+	if (all->keys[UP] && (all->cursor.y >= 0))
 		all->cursor.y -= 1;
-	if (all->keys[DOWN])
+	if (all->keys[DOWN] && (all->cursor.y < IMG_SCREEN_LENGHT))
 		all->cursor.y += 1;
 }
 
@@ -94,5 +94,9 @@ int			ft_textbar_keys(int key, t_all *all)
 	0);
 	mlx_string_put(all->ptr.mlx, all->ptr.win, all->text_bar.x + 10,
 	all->text_bar.y + 3, 0x000000, all->text);
+	mlx_string_put(all->ptr.mlx, all->ptr.win, all->text_bar.x - 105,
+	all->text_bar.y + 3, 0x000000, "Set color:");
+	mlx_string_put(all->ptr.mlx, all->ptr.win, all->visual_color.x - 145,
+	all->text_bar.y + 3, 0x000000, "Color preview:");
 	return (0);
 }
