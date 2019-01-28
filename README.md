@@ -5,7 +5,7 @@ A simple 2D magic screen renderer.
 
 ## Features :
 
-* Choice color (Inside the textbar)
+* Choice color (Inside the textbar, in hexadecimal format)
 * Choice size cursor
 
 ## Download format :
@@ -14,7 +14,7 @@ A simple 2D magic screen renderer.
 
 ## Compilation :
 
-Enter in the dowloaded file ```cd Magic_screen/``` and compile an executable with command ```make``` after that run the program with ```./magic_screen```
+Enter in the dowloaded folder ```cd Magic_screen/``` and compile an executable with command ```make``` after that run the program with ```./magic_screen```
 
 ## Commands :
 
